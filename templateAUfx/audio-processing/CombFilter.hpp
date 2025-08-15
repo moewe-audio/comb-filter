@@ -10,26 +10,28 @@
 #define CombFilter_h
 
 #include <vector>
-#include "RingBuffer.h"
+#include "FractionalDelayLine.h"
 
-class CombFilter {
+class CombFilter
+{
 public:
-    CombFilter() = default;
     void init(float maxDelayMs, double sampleRate);
-    void setDelay(float delayMs);
+    void setFeedforwardDelay(float delayMs);
+    void setFeedbackDelay(float delayMs);
+    void setFeedforwardGain(float g) { gFf = g; }
+    void setFeedbackGain(float g) { gFb = g; }
+
     float processSample(float in);
-    
+
 private:
-    float readFrac();
-    
-    std::vector<float> delayedSamples;
-    int delaySamples;
-    int maxDelaySamples;
-    float fractionalDelaySamples;
-    float gain = 0.3;
-    double sampleRate;
+    double sampleRate = 44100.0;
+    float  gFf = 0.0f;
+    float  gFb = 0.0f;
+
+    FractionalDelayLine ffDelay;
+    FractionalDelayLine fbDelay;
+
     bool ready = false;
-    RingBuffer delayBuffer;
 };
 
 #endif /* CombFilter_h */

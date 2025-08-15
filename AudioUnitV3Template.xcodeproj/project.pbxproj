@@ -84,6 +84,7 @@
 		584B061020F5098B006694BA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		584B061220F50990006694BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		584B061420F50A13006694BA /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		915C70902E4F7AF900BCFFBC /* FractionalDelayLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FractionalDelayLine.h; sourceTree = "<group>"; };
 		917E29E62E4D38A9001BEED4 /* CombFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CombFilter.hpp; sourceTree = "<group>"; };
 		917E29E72E4D38A9001BEED4 /* CombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CombFilter.cpp; sourceTree = "<group>"; };
 		917E29E82E4D38A9001BEED4 /* RingBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
@@ -196,6 +197,7 @@
 				917E29E62E4D38A9001BEED4 /* CombFilter.hpp */,
 				917E29E72E4D38A9001BEED4 /* CombFilter.cpp */,
 				917E29E82E4D38A9001BEED4 /* RingBuffer.h */,
+				915C70902E4F7AF900BCFFBC /* FractionalDelayLine.h */,
 			);
 			path = "audio-processing";
 			sourceTree = "<group>";

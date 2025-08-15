@@ -25,12 +25,12 @@ public:
 
     void reset() noexcept { head = 0; }
 
-    inline void pushSample(float sample) {
+    void pushSample(float sample) {
         data[head & bitMask] = sample;
         ++head;
     }
 
-    inline float getDelayedSample(size_t delay) const
+    float getDelayedSample(size_t delay) const
     {
         size_t idx = (head - 1 - delay) & bitMask;
         return data[idx];

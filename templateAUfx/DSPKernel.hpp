@@ -10,6 +10,7 @@
 #define DSPKernel_h
 //==============================================================================
 #include "CombFilter.hpp"
+#include <vector>
 //==============================================================================
 /*
  DSPKernel Performs our filter signal processing.
@@ -27,8 +28,16 @@ public:
     {
         channels = channelCount;
         sampleRate = float(inSampleRate);
-        combFilter.init(20, sampleRate);
-        combFilter.setDelay(12);
+        for (int i = 0; i < channelCount; i++)
+        {
+            stereoComb.push_back(CombFilter());
+            stereoComb[i].init(20, sampleRate);
+            stereoComb[i].setFeedforwardDelay(12);
+            stereoComb[i].setFeedbackDelay(16);
+            stereoComb[i].setFeedforwardGain(0.8);
+            stereoComb[i].setFeedbackGain(0.8);
+        }
+
     }
     //==============================================================================
     /**
@@ -54,7 +63,7 @@ public:
                 float* in  = (float*)inBufferListPtr->mBuffers[channel].mData  + frameOffset;
                 float* out = (float*)outBufferListPtr->mBuffers[channel].mData + frameOffset;
                 const float x = *in;
-                const float xDelayed = combFilter.processSample(x);
+                const float xDelayed = stereoComb[channel].processSample(x);
                 *out = xDelayed;
             }
         }
@@ -121,7 +130,7 @@ public:
      */
     AUValue getParameter(AUParameterAddress address)
     {
-//        OSAtomicIncrement32Barrier(&changeCounter); // add in later
+//        OSAtomicIncremesnt32Barrier(&changeCounter); // add in later
         return effectParameter;
     }
     
@@ -132,7 +141,7 @@ private:
     int channels;
     AudioBufferList* inBufferListPtr = nullptr;
     AudioBufferList* outBufferListPtr = nullptr;
-    CombFilter combFilter;
+    std::vector<CombFilter> stereoComb;
 public:
     //==========================================================================
     // MARK: Parameters
