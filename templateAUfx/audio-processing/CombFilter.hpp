@@ -16,12 +16,13 @@ class CombFilter
 {
 public:
     void init(float maxDelayMs, double sampleRate);
+    float processSample(float in);
+    
+    void setFrequency(float freq);
     void setFeedforwardDelay(float delayMs);
     void setFeedbackDelay(float delayMs);
     void setFeedforwardGain(float g) { gFf = g; }
     void setFeedbackGain(float g) { gFb = g; }
-
-    float processSample(float in);
 
 private:
     double sampleRate = 44100.0;

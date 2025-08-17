@@ -31,11 +31,10 @@ public:
         for (int i = 0; i < channelCount; i++)
         {
             stereoComb.push_back(CombFilter());
-            stereoComb[i].init(20, sampleRate);
-            stereoComb[i].setFeedforwardDelay(12);
-            stereoComb[i].setFeedbackDelay(16);
+            stereoComb[i].init(40, sampleRate);
+            stereoComb[i].setFrequency(440);
             stereoComb[i].setFeedforwardGain(0.8);
-            stereoComb[i].setFeedbackGain(0.8);
+            stereoComb[i].setFeedbackGain(0.93f);
         }
 
     }

@@ -9,38 +9,43 @@
 #ifndef RingBuffer_hpp
 #define RingBuffer_hpp
 
-#include <stdio.h>
 #include <vector>
-
-using namespace std;
+#include <cstddef>
 
 class RingBuffer {
 public:
     RingBuffer() = default;
 
-    void init(size_t maxCapacity) {
-        bitMask = maxCapacity - 1;
-        data.assign(maxCapacity, 0.0f);
+    void init(std::size_t capacity) {
+        cap = capacity > 0 ? capacity : 1;
+        data.assign(cap, 0.0f);
+        head = 0;
     }
 
-    void reset() noexcept { head = 0; }
+    void reset() noexcept {
+        head = 0;
+        std::fill(data.begin(), data.end(), 0.0f);
+    }
 
     void pushSample(float sample) {
-        data[head & bitMask] = sample;
+        data[head % cap] = sample;
         ++head;
     }
 
-    float getDelayedSample(size_t delay) const
-    {
-        size_t idx = (head - 1 - delay) & bitMask;
+    float getDelayedSample(std::size_t delay) const {
+        // head points to the *next* write position
+        // last written sample is at head-1
+        std::size_t pos = (head == 0 ? 0 : (head - 1));
+        std::size_t idx = (pos + cap - (delay % cap)) % cap;
         return data[idx];
     }
 
+    std::size_t capacity() const noexcept { return cap; }
+
 private:
-    vector<float> data;
-    size_t cap  = 0;
-    size_t bitMask = 0;
-    size_t head = 0;
+    std::vector<float> data;
+    std::size_t cap  = 0;
+    std::size_t head = 0;
 };
 
 #endif /* RingBuffer_hpp */

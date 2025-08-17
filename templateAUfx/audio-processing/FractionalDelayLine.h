@@ -38,8 +38,6 @@ public:
     
     void setDelayMs(float delayMs)
     {
-        if (!ready) return;
-
         const double dRaw = std::max(0.0, static_cast<double>(delayMs) * sampleRate / 1000.0);
         const double dMaxForLag = static_cast<double>(maxDelaySamples - 2);
         const double d = std::min(dRaw, std::max(0.0, dMaxForLag));
@@ -55,7 +53,7 @@ public:
     void push(float x)
     {
         if (!ready) return;
-        
+        buff.pushSample(x);
     }
     
     float read() const
