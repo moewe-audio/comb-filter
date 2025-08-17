@@ -8,7 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AudioUnitViewController" customModule="templateAUfxWithParameters" customModuleProvider="target">
             <connections>
-                <outlet property="gainSlider" destination="Hi9-py-KrF" id="a0e-FY-9eL"/>
+                <outlet property="feedbackSlider" destination="Hi9-py-KrF" id="a0e-FY-9eL"/>
                 <outlet property="view" destination="c22-O7-iKe" id="hzH-WR-f05"/>
             </connections>
         </customObject>
@@ -23,17 +23,35 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="386" id="mGN-0p-lg8"/>
                     </constraints>
-                    <sliderCell key="cell" alignment="left" maxValue="1" doubleValue="0.6208926151761518" tickMarkPosition="above" sliderType="linear" id="19f-Bc-aTv"/>
+                    <sliderCell key="cell" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" numberOfTickMarks="7" sliderType="linear" id="19f-Bc-aTv"/>
                     <connections>
-                        <action selector="handleGainSliderValueChanged:" target="-2" id="K2s-Nu-DDQ"/>
+                        <action selector="handleFeedbackSliderValueChanged:" target="-2" id="K2s-Nu-DDQ"/>
                     </connections>
                 </slider>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97O-Cn-Qbw">
-                    <rect key="frame" x="201" y="203" width="66" height="26"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Gain :)" id="OV2-Sa-Atk">
+                    <rect key="frame" x="185" y="203" width="98" height="26"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Feedback" id="OV2-Sa-Atk">
                         <font key="font" metaFont="system" size="22"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
+                    <rect key="frame" x="433" y="177" width="13" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-3e-ygM">
+                    <rect key="frame" x="27" y="177" width="17" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="2RG-iz-uD3">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>

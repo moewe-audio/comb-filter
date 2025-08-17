@@ -11,7 +11,7 @@ import CoreAudioKit
 public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
 {
     //==========================================================================
-    @IBOutlet var gainSlider: NSSlider!
+    @IBOutlet var feedbackSlider: NSSlider!
     //==========================================================================
     var audioUnit: AUAudioUnit?
     //==========================================================================
@@ -41,11 +41,11 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
     }
     //==========================================================================
 
-    @IBAction func handleGainSliderValueChanged(_ sender: NSSlider)
+    @IBAction func handleFeedbackSliderValueChanged(_ sender: NSSlider)
     {
         guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
-        guard let gainParameter = modulatorUnit.parameterTree?.parameter(withAddress: myParam1) else { return }
-        gainParameter.setValue(sender.floatValue, originator: nil)
+        guard let feedbackParam = modulatorUnit.parameterTree?.parameter(withAddress: myFeedbackParam) else { return }
+        feedbackParam.setValue(sender.floatValue, originator: nil)
     }
     //==========================================================================
 }

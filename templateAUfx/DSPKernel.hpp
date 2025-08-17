@@ -11,6 +11,7 @@
 //==============================================================================
 #include "CombFilter.hpp"
 #include <vector>
+#include "templateAUfxWithParametersAudioUnit.h"
 //==============================================================================
 /*
  DSPKernel Performs our filter signal processing.
@@ -33,8 +34,8 @@ public:
             stereoComb.push_back(CombFilter());
             stereoComb[i].init(40, sampleRate);
             stereoComb[i].setFrequency(440);
-            stereoComb[i].setFeedforwardGain(0.8);
-            stereoComb[i].setFeedbackGain(0.93f);
+            stereoComb[i].setFeedforwardGain(0.f);
+            stereoComb[i].setFeedbackGain(0.f);
         }
 
     }
@@ -118,7 +119,13 @@ public:
      */
     void setParameter(AUParameterAddress address, AUValue value)
     {
-        effectParameter = value;
+        if (address == myFeedbackParam)
+        {
+            for (CombFilter &comb : stereoComb)
+            {
+                comb.setFeedbackGain(value);
+            }
+        }
     }
     
     /**
@@ -129,8 +136,12 @@ public:
      */
     AUValue getParameter(AUParameterAddress address)
     {
-//        OSAtomicIncremesnt32Barrier(&changeCounter); // add in later
-        return effectParameter;
+//        OSAtomicIncremesnt32Barrier(&changeCounter); // add in
+        if (address == myFeedbackParam)
+        {
+            return stereoComb[0].getFeedbackGain();
+        }
+        return 0;
     }
     
 private:
@@ -143,8 +154,6 @@ private:
     std::vector<CombFilter> stereoComb;
 public:
     //==========================================================================
-    // MARK: Parameters
-    float effectParameter = 0;
 };
 
 #endif /* DSPKernel_h */

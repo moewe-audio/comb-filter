@@ -12,7 +12,7 @@
 #import "BufferedAudioBus.hpp"
 //==============================================================================
 // Define parameter addresses.
-const AUParameterAddress myParam1 = 0;
+const AUParameterAddress myFeedbackParam = 0;
 //==============================================================================
 @interface templateAUfxWithParametersAudioUnit ()
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
@@ -28,6 +28,13 @@ const AUParameterAddress myParam1 = 0;
     DSPKernel  _kernel;
 }
 @synthesize parameterTree = _parameterTree;
+
+static inline AUValue shapeFeedback(AUValue v, AUValue k) {
+    float a = fabsf(v);
+    float shaped = 1.f - powf(1.f - a, k);
+    return copysignf(shaped, v);
+}
+
 //==============================================================================
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError
 {
@@ -42,20 +49,20 @@ const AUParameterAddress myParam1 = 0;
                                                                                   channels:2];
     //==========================================================================
     // Create parameter objects Here
-    AUParameter *param1 = [AUParameterTree createParameterWithIdentifier:@"param1"
-                                                                    name:@"Parameter 1"
-                                                                 address:myParam1
-                                                                     min:0
-                                                                     max:100
+    AUParameter *feedbackParam = [AUParameterTree createParameterWithIdentifier:@"feedback"
+                                                                    name:@"Feedback"
+                                                                 address:myFeedbackParam
+                                                                     min:-0.999
+                                                                     max:0.999
                                                                     unit:kAudioUnitParameterUnit_Percent
                                                                 unitName:nil
                                                                    flags:0
                                                             valueStrings:nil
                                                      dependentParameters:nil];
     //--------------------------------------------------------------------------
-    param1.value = 0.5; // Initialize the parameter values.
+    feedbackParam.value = 0; // Initialize the parameter values.
     //--------------------------------------------------------------------------
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1 ]];  // Create the parameter tree.
+    _parameterTree = [AUParameterTree createTreeWithChildren:@[ feedbackParam ]];  // Create the parameter tree.
     //--------------------------------------------------------------------------
     // Set .implementorStringFromValueCallback of a type
     // AUImplementorStringFromValueCallbackto to a pointer to a function
@@ -65,7 +72,7 @@ const AUParameterAddress myParam1 = 0;
         AUValue value = valuePtr == nil ? param.value : *valuePtr;
         switch (param.address)
         {
-            case myParam1:
+            case myFeedbackParam:
                 return [NSString stringWithFormat:@"%.f", value];
             default:
                 return @"?";
@@ -77,7 +84,17 @@ const AUParameterAddress myParam1 = 0;
     // implementorValueObserver is called when a parameter changes value.
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value)
     {
-         localCaptureKernel->setParameter(param.address, value);
+        switch (param.address) {
+            case myFeedbackParam: {
+                const AUValue k = 3.0f;
+                AUValue coeff = shapeFeedback(value, k);
+                localCaptureKernel->setParameter(param.address, coeff);
+                break;
+            }
+            default:
+                localCaptureKernel->setParameter(param.address, value);
+                break;
+        }
     };
     //--------------------------------------------------------------------------
     // implementorValueProvider is called when the value needs to be refreshed.

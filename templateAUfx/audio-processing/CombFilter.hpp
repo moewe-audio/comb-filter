@@ -23,6 +23,8 @@ public:
     void setFeedbackDelay(float delayMs);
     void setFeedforwardGain(float g) { gFf = g; }
     void setFeedbackGain(float g) { gFb = g; }
+    
+    float getFeedbackGain() { return gFb; };
 
 private:
     double sampleRate = 44100.0;
