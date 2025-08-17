@@ -25,11 +25,13 @@ public:
     void setFeedbackGain(float g) { gFb = g; }
     
     float getFeedbackGain() { return gFb; };
+    float getFrequency() { return frequency; };
 
 private:
     double sampleRate = 44100.0;
     float  gFf = 0.0f;
     float  gFb = 0.0f;
+    float frequency;
 
     FractionalDelayLine ffDelay;
     FractionalDelayLine fbDelay;

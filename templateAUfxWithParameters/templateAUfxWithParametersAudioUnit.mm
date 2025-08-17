@@ -13,6 +13,7 @@
 //==============================================================================
 // Define parameter addresses.
 const AUParameterAddress myFeedbackParam = 0;
+const AUParameterAddress myFrequencyParam = 1;
 //==============================================================================
 @interface templateAUfxWithParametersAudioUnit ()
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
@@ -59,10 +60,23 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
                                                                    flags:0
                                                             valueStrings:nil
                                                      dependentParameters:nil];
+    feedbackParam.value = 0; // Initialize the parameter values.
+    
+    AUParameter *frequencyParam = [AUParameterTree createParameterWithIdentifier:@"frequency"
+                                                                    name:@"Frequency"
+                                                                     address:myFrequencyParam
+                                                                     min:20
+                                                                     max:20000
+                                                                            unit:kAudioUnitParameterUnit_Hertz
+                                                                unitName:nil
+                                                                   flags:0
+                                                            valueStrings:nil
+                                                     dependentParameters:nil];
     //--------------------------------------------------------------------------
     feedbackParam.value = 0; // Initialize the parameter values.
+    
     //--------------------------------------------------------------------------
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[ feedbackParam ]];  // Create the parameter tree.
+    _parameterTree = [AUParameterTree createTreeWithChildren:@[ feedbackParam, frequencyParam ]];  // Create the parameter tree.
     //--------------------------------------------------------------------------
     // Set .implementorStringFromValueCallback of a type
     // AUImplementorStringFromValueCallbackto to a pointer to a function
@@ -73,6 +87,8 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
         switch (param.address)
         {
             case myFeedbackParam:
+                return [NSString stringWithFormat:@"%.f", value];
+            case myFrequencyParam:
                 return [NSString stringWithFormat:@"%.f", value];
             default:
                 return @"?";
@@ -89,6 +105,10 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
                 const AUValue k = 3.0f;
                 AUValue coeff = shapeFeedback(value, k);
                 localCaptureKernel->setParameter(param.address, coeff);
+                break;
+            }
+            case myFrequencyParam: {
+                localCaptureKernel->setParameter(param.address, value);
                 break;
             }
             default:

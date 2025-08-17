@@ -125,6 +125,12 @@ public:
             {
                 comb.setFeedbackGain(value);
             }
+        } else if (address == myFrequencyParam)
+        {
+            for (CombFilter &comb : stereoComb)
+            {
+                comb.setFrequency( value);
+            }
         }
     }
     
@@ -140,6 +146,9 @@ public:
         if (address == myFeedbackParam)
         {
             return stereoComb[0].getFeedbackGain();
+        } else if (address == myFrequencyParam)
+        {
+            return stereoComb[0].getFrequency();
         }
         return 0;
     }

@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AudioUnitViewController" customModule="templateAUfxWithParameters" customModuleProvider="target">
             <connections>
                 <outlet property="feedbackSlider" destination="Hi9-py-KrF" id="a0e-FY-9eL"/>
+                <outlet property="frequencySlider" destination="kr0-z7-YyK" id="Z2E-zH-xmU"/>
                 <outlet property="view" destination="c22-O7-iKe" id="hzH-WR-f05"/>
             </connections>
         </customObject>
@@ -36,15 +37,6 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
-                    <rect key="frame" x="433" y="177" width="13" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-3e-ygM">
                     <rect key="frame" x="27" y="177" width="17" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -54,6 +46,34 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
+                    <rect key="frame" x="433" y="177" width="13" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rRX-tn-pOO">
+                    <rect key="frame" x="185" y="119" width="105" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency" id="E4y-uK-hvR">
+                        <font key="font" metaFont="system" size="22"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kr0-z7-YyK">
+                    <rect key="frame" x="39" y="85" width="390" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <sliderCell key="cell" state="on" alignment="left" minValue="20" maxValue="20000" doubleValue="20" tickMarkPosition="above" sliderType="linear" id="hrQ-vM-edw">
+                        <font key="font" size="12" name="Helvetica"/>
+                    </sliderCell>
+                    <connections>
+                        <action selector="handleFrequencySliderValueChanged:" target="-2" id="18w-fh-kBT"/>
+                    </connections>
+                </slider>
             </subviews>
             <constraints>
                 <constraint firstItem="Hi9-py-KrF" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="175" id="RHs-J7-r4o"/>

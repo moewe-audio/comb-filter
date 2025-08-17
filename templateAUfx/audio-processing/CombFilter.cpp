@@ -22,6 +22,7 @@ void CombFilter::init(float maxDelayMs, double sr)
 void CombFilter::setFrequency(float freq)
 {
     float delayMs = 1000.0f * (sampleRate / freq) / sampleRate;
+    frequency = freq;
     setFeedforwardDelay(delayMs);
     setFeedbackDelay(delayMs);
 }

@@ -12,6 +12,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
 {
     //==========================================================================
     @IBOutlet var feedbackSlider: NSSlider!
+    @IBOutlet var frequencySlider: NSSlider!
     //==========================================================================
     var audioUnit: AUAudioUnit?
     //==========================================================================
@@ -46,6 +47,13 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
         guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
         guard let feedbackParam = modulatorUnit.parameterTree?.parameter(withAddress: myFeedbackParam) else { return }
         feedbackParam.setValue(sender.floatValue, originator: nil)
+    }
+    
+    @IBAction func handleFrequencySliderValueChanged(_ sender: NSSlider)
+    {
+        guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
+        guard let freqParam = modulatorUnit.parameterTree?.parameter(withAddress: myFrequencyParam) else { return }
+        freqParam.setValue(sender.floatValue, originator: nil)
     }
     //==========================================================================
 }
