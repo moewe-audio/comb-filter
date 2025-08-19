@@ -10,10 +10,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DSPKernel.hpp"
 #import "BufferedAudioBus.hpp"
-//==============================================================================
-// Define parameter addresses.
-const AUParameterAddress myFeedbackParam = 0;
-const AUParameterAddress myFrequencyParam = 1;
+#import "ParameterAddresses.h"
+
 //==============================================================================
 @interface templateAUfxWithParametersAudioUnit ()
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
@@ -52,7 +50,7 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
     // Create parameter objects Here
     AUParameter *feedbackParam = [AUParameterTree createParameterWithIdentifier:@"feedback"
                                                                     name:@"Feedback"
-                                                                 address:myFeedbackParam
+                                                                        address:kParamFeedback
                                                                      min:-0.999
                                                                      max:0.999
                                                                     unit:kAudioUnitParameterUnit_Percent
@@ -64,7 +62,7 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
     
     AUParameter *frequencyParam = [AUParameterTree createParameterWithIdentifier:@"frequency"
                                                                     name:@"Frequency"
-                                                                     address:myFrequencyParam
+                                                                         address:kParamFrequency
                                                                      min:20
                                                                      max:20000
                                                                             unit:kAudioUnitParameterUnit_Hertz
@@ -86,9 +84,9 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
         AUValue value = valuePtr == nil ? param.value : *valuePtr;
         switch (param.address)
         {
-            case myFeedbackParam:
+            case kParamFeedback:
                 return [NSString stringWithFormat:@"%.f", value];
-            case myFrequencyParam:
+            case kParamFrequency:
                 return [NSString stringWithFormat:@"%.f", value];
             default:
                 return @"?";
@@ -101,13 +99,13 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value)
     {
         switch (param.address) {
-            case myFeedbackParam: {
+            case kParamFeedback: {
                 const AUValue k = 3.0f;
                 AUValue coeff = shapeFeedback(value, k);
                 localCaptureKernel->setParameter(param.address, coeff);
                 break;
             }
-            case myFrequencyParam: {
+            case kParamFrequency: {
                 localCaptureKernel->setParameter(param.address, value);
                 break;
             }

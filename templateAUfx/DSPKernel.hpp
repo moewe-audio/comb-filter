@@ -12,6 +12,7 @@
 #include "CombFilter.hpp"
 #include <vector>
 #include "templateAUfxWithParametersAudioUnit.h"
+#include "ParameterAddresses.h"
 //==============================================================================
 /*
  DSPKernel Performs our filter signal processing.
@@ -29,9 +30,10 @@ public:
     {
         channels = channelCount;
         sampleRate = float(inSampleRate);
-        for (int i = 0; i < channelCount; i++)
-        {
-            stereoComb.push_back(CombFilter());
+        stereoComb.clear();
+        stereoComb.reserve(channelCount);
+        for (int i = 0; i < channelCount; ++i) {
+            stereoComb.emplace_back();
             stereoComb[i].init(40, sampleRate);
             stereoComb[i].setFrequency(440);
             stereoComb[i].setFeedforwardGain(0.f);
@@ -106,7 +108,22 @@ public:
                 framesRemaining -= framesThisSegment;    // Advance frames.
                 now += AUEventSampleTime(framesThisSegment); // Advance time.
             }
-            //            performAllSimultaneousEvents(now, event);
+            // Not sample-accurate, but fine for my little demo...
+            while (event) {
+                if (event->head.eventType == AURenderEventMIDI) {
+                    
+                    AUMIDIEvent midiEvent = event->MIDI;
+                    uint8_t message = midiEvent.data[0] & 0xF0;
+                    uint8_t data1 = midiEvent.data[1];
+                    uint8_t data2 = midiEvent.data[2];
+                    
+                    if (message == 0x90 && data2 > 0) { // Note On
+                        float hz = 440.0f * powf(2.0f, (int(data1) - 69) / 12.0f);
+                        setParameter(kParamFrequency, AUValue(hz));
+                    }
+                    event = event->head.next;
+                }
+            }
         }
     }
     //==========================================================================
@@ -119,13 +136,13 @@ public:
      */
     void setParameter(AUParameterAddress address, AUValue value)
     {
-        if (address == myFeedbackParam)
+        if (address == kParamFeedback)
         {
             for (CombFilter &comb : stereoComb)
             {
                 comb.setFeedbackGain(value);
             }
-        } else if (address == myFrequencyParam)
+        } else if (address == kParamFrequency)
         {
             for (CombFilter &comb : stereoComb)
             {
@@ -143,10 +160,10 @@ public:
     AUValue getParameter(AUParameterAddress address)
     {
 //        OSAtomicIncremesnt32Barrier(&changeCounter); // add in
-        if (address == myFeedbackParam)
+        if (address == kParamFeedback)
         {
             return stereoComb[0].getFeedbackGain();
-        } else if (address == myFrequencyParam)
+        } else if (address == kParamFrequency)
         {
             return stereoComb[0].getFrequency();
         }

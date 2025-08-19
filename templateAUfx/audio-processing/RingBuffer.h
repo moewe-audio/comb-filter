@@ -33,7 +33,7 @@ public:
     }
 
     float getDelayedSample(std::size_t delay) const {
-        // head points to the *next* write position
+        // head points to the next write position
         // last written sample is at head-1
         std::size_t pos = (head == 0 ? 0 : (head - 1));
         std::size_t idx = (pos + cap - (delay % cap)) % cap;

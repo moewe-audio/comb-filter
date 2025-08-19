@@ -58,7 +58,6 @@
 
 /* Begin PBXFileReference section */
 		5841703E20F6190E00290C59 /* templateAUfxWithParameters.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = templateAUfxWithParameters.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		5841704020F6190E00290C59 /* templateAUfxWithParametersAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = templateAUfxWithParametersAudioUnit.h; sourceTree = "<group>"; };
 		5841704120F6190E00290C59 /* templateAUfxWithParametersAudioUnit.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = templateAUfxWithParametersAudioUnit.mm; sourceTree = "<group>"; };
 		5841704320F6190E00290C59 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		5841704620F6190E00290C59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AudioUnitViewController.xib; sourceTree = "<group>"; };
@@ -85,6 +84,8 @@
 		584B061220F50990006694BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		584B061420F50A13006694BA /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		915C70902E4F7AF900BCFFBC /* FractionalDelayLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FractionalDelayLine.h; sourceTree = "<group>"; };
+		917325B02E54EB8F004F202E /* ParameterAddresses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterAddresses.h; sourceTree = "<group>"; };
+		917325B12E54ED0C004F202E /* templateAUfxWithParametersAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = templateAUfxWithParametersAudioUnit.h; sourceTree = "<group>"; };
 		917E29E62E4D38A9001BEED4 /* CombFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CombFilter.hpp; sourceTree = "<group>"; };
 		917E29E72E4D38A9001BEED4 /* CombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CombFilter.cpp; sourceTree = "<group>"; };
 		917E29E82E4D38A9001BEED4 /* RingBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
@@ -120,13 +121,14 @@
 		5841703F20F6190E00290C59 /* templateAUfxWithParameters */ = {
 			isa = PBXGroup;
 			children = (
-				5841704020F6190E00290C59 /* templateAUfxWithParametersAudioUnit.h */,
+				917325B02E54EB8F004F202E /* ParameterAddresses.h */,
 				5841704120F6190E00290C59 /* templateAUfxWithParametersAudioUnit.mm */,
 				5841704920F6190E00290C59 /* templateAUfxWithParameters-Bridging-Header.h */,
 				5841704320F6190E00290C59 /* AudioUnitViewController.swift */,
 				5841704520F6190E00290C59 /* AudioUnitViewController.xib */,
 				5841704820F6190E00290C59 /* Info.plist */,
 				5841704A20F6190E00290C59 /* templateAUfxWithParameters.entitlements */,
+				917325B12E54ED0C004F202E /* templateAUfxWithParametersAudioUnit.h */,
 			);
 			path = templateAUfxWithParameters;
 			sourceTree = "<group>";

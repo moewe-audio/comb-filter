@@ -7,12 +7,7 @@
 //
 //==============================================================================
 #import <AudioToolbox/AudioToolbox.h>
-//==============================================================================
-// Define parameter addresses.
-extern const AUParameterAddress myFeedbackParam;
-extern const AUParameterAddress myFrequencyParam;
-//==============================================================================
-@interface templateAUfxWithParametersAudioUnit : AUAudioUnit
 
+
+@interface templateAUfxWithParametersAudioUnit : AUAudioUnit
 @end
-//==============================================================================

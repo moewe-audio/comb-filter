@@ -7,3 +7,4 @@
 //
 
 #import "templateAUfxWithParametersAudioUnit.h"
+#import "ParameterAddresses.h"
