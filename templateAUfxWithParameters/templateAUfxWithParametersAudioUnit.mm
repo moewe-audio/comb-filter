@@ -34,6 +34,15 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
     return copysignf(shaped, v);
 }
 
+static inline AUValue logHz(AUValue linear, AUValue minHz, AUValue maxHz) {
+    AUValue t = fmaxf(0.f, fminf(1.f, linear));
+    AUValue lo = fmaxf(minHz, 1e-6f);
+    AUValue hi = fmaxf(maxHz, lo * 1.0001f);
+    AUValue logLo = logf(lo);
+    AUValue logHi = logf(hi);
+    return expf(logLo + (logHi - logLo) * t);
+}
+
 //==============================================================================
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError
 {
@@ -51,8 +60,8 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
     AUParameter *feedbackParam = [AUParameterTree createParameterWithIdentifier:@"feedback"
                                                                     name:@"Feedback"
                                                                         address:kParamFeedback
-                                                                     min:-0.999
-                                                                     max:0.999
+                                                                     min:-0.95
+                                                                     max:0.95
                                                                     unit:kAudioUnitParameterUnit_Percent
                                                                 unitName:nil
                                                                    flags:0
@@ -63,18 +72,31 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
     AUParameter *frequencyParam = [AUParameterTree createParameterWithIdentifier:@"frequency"
                                                                     name:@"Frequency"
                                                                          address:kParamFrequency
-                                                                     min:20
-                                                                     max:20000
+                                                                     min:0
+                                                                     max:1
                                                                             unit:kAudioUnitParameterUnit_Hertz
                                                                 unitName:nil
                                                                    flags:0
                                                             valueStrings:nil
                                                      dependentParameters:nil];
-    //--------------------------------------------------------------------------
     feedbackParam.value = 0; // Initialize the parameter values.
     
+    AUParameter *dampingParam = [AUParameterTree createParameterWithIdentifier:@"damping"
+                                                                    name:@"Damping"
+                                                                       address:kParamDamping
+                                                                     min:0
+                                                                     max:1
+                                                                            unit:kAudioUnitParameterUnit_Hertz
+                                                                unitName:nil
+                                                                   flags:0
+                                                            valueStrings:nil
+                                                     dependentParameters:nil];
+    
+    dampingParam.value = 0;
     //--------------------------------------------------------------------------
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[ feedbackParam, frequencyParam ]];  // Create the parameter tree.
+    
+    //--------------------------------------------------------------------------
+    _parameterTree = [AUParameterTree createTreeWithChildren:@[ feedbackParam, frequencyParam, dampingParam ]];  // Create the parameter tree.
     //--------------------------------------------------------------------------
     // Set .implementorStringFromValueCallback of a type
     // AUImplementorStringFromValueCallbackto to a pointer to a function
@@ -87,6 +109,8 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
             case kParamFeedback:
                 return [NSString stringWithFormat:@"%.f", value];
             case kParamFrequency:
+                return [NSString stringWithFormat:@"%.f", value];
+            case kParamDamping:
                 return [NSString stringWithFormat:@"%.f", value];
             default:
                 return @"?";
@@ -106,7 +130,13 @@ static inline AUValue shapeFeedback(AUValue v, AUValue k) {
                 break;
             }
             case kParamFrequency: {
-                localCaptureKernel->setParameter(param.address, value);
+                AUValue coeff = logHz(value, 20, 20000);
+                localCaptureKernel->setParameter(param.address, coeff);
+                break;
+            }
+            case kParamDamping: {
+                AUValue coeff = logHz(value, 20, 20000);
+                localCaptureKernel->setParameter(param.address, coeff);
                 break;
             }
             default:

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "FractionalDelayLine.h"
+#include "OnePole.hpp"
 
 class CombFilter
 {
@@ -23,6 +24,8 @@ public:
     void setFeedbackDelay(float delayMs);
     void setFeedforwardGain(float g) { gFf = g; }
     void setFeedbackGain(float g) { gFb = g; }
+    void setDamping(float damping) { lpFilter.setCutoff(damping); };
+    float getDamping() { return lpFilter.getCutoff(); };
     
     float getFeedbackGain() { return gFb; };
     float getFrequency() { return frequency; };
@@ -36,6 +39,8 @@ private:
     FractionalDelayLine ffDelay;
     FractionalDelayLine fbDelay;
 
+    OnePole lpFilter;
+    
     bool ready = false;
 };
 

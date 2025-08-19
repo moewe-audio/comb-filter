@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AudioUnitViewController" customModule="templateAUfxWithParameters" customModuleProvider="target">
             <connections>
+                <outlet property="dampingSlider" destination="Lgb-4c-Ro4" id="edc-fu-hg5"/>
                 <outlet property="feedbackSlider" destination="Hi9-py-KrF" id="a0e-FY-9eL"/>
                 <outlet property="frequencySlider" destination="kr0-z7-YyK" id="Z2E-zH-xmU"/>
                 <outlet property="view" destination="c22-O7-iKe" id="hzH-WR-f05"/>
@@ -19,72 +20,111 @@
             <rect key="frame" x="0.0" y="0.0" width="468" height="370"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hi9-py-KrF">
-                    <rect key="frame" x="39" y="169" width="390" height="28"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="386" id="mGN-0p-lg8"/>
-                    </constraints>
-                    <sliderCell key="cell" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" numberOfTickMarks="7" sliderType="linear" id="19f-Bc-aTv"/>
-                    <connections>
-                        <action selector="handleFeedbackSliderValueChanged:" target="-2" id="K2s-Nu-DDQ"/>
-                    </connections>
-                </slider>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97O-Cn-Qbw">
-                    <rect key="frame" x="185" y="203" width="98" height="26"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Feedback" id="OV2-Sa-Atk">
-                        <font key="font" metaFont="system" size="22"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-3e-ygM">
-                    <rect key="frame" x="27" y="177" width="17" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="2RG-iz-uD3">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
-                    <rect key="frame" x="433" y="177" width="13" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rRX-tn-pOO">
-                    <rect key="frame" x="185" y="119" width="105" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency" id="E4y-uK-hvR">
-                        <font key="font" metaFont="system" size="22"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kr0-z7-YyK">
-                    <rect key="frame" x="39" y="85" width="390" height="28"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <sliderCell key="cell" state="on" alignment="left" minValue="20" maxValue="20000" doubleValue="20" tickMarkPosition="above" sliderType="linear" id="hrQ-vM-edw">
-                        <font key="font" size="12" name="Helvetica"/>
-                    </sliderCell>
-                    <connections>
-                        <action selector="handleFrequencySliderValueChanged:" target="-2" id="18w-fh-kBT"/>
-                    </connections>
-                </slider>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="34" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7J4-2d-lQ9">
+                    <rect key="frame" x="39" y="37" width="418" height="308"/>
+                    <subviews>
+                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97O-Cn-Qbw">
+                            <rect key="frame" x="160" y="282" width="98" height="26"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Feedback" id="OV2-Sa-Atk">
+                                <font key="font" metaFont="system" size="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bY8-Ql-VvP">
+                            <rect key="frame" x="0.0" y="228" width="418" height="20"/>
+                            <subviews>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
+                                    <rect key="frame" x="-2" y="2" width="13" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hi9-py-KrF">
+                                    <rect key="frame" x="15" y="-6" width="390" height="28"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="386" id="mGN-0p-lg8"/>
+                                    </constraints>
+                                    <sliderCell key="cell" state="on" alignment="left" minValue="-1" maxValue="1" doubleValue="0.62890625" tickMarkPosition="above" numberOfTickMarks="7" sliderType="linear" id="19f-Bc-aTv"/>
+                                    <connections>
+                                        <action selector="handleFeedbackSliderValueChanged:" target="-2" id="K2s-Nu-DDQ"/>
+                                    </connections>
+                                </slider>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-3e-ygM">
+                                    <rect key="frame" x="409" y="2" width="11" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="2RG-iz-uD3">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oPy-iK-d5S">
+                            <rect key="frame" x="164" y="168" width="91" height="26"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Damping" id="ZK2-hf-Ko9">
+                                <font key="font" metaFont="system" size="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lgb-4c-Ro4">
+                            <rect key="frame" x="14" y="108" width="390" height="28"/>
+                            <sliderCell key="cell" state="on" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="1St-1C-fAf">
+                                <font key="font" size="12" name="Helvetica"/>
+                            </sliderCell>
+                            <connections>
+                                <action selector="handleDampingSliderValueChanged:" target="-2" id="hFb-AV-nia"/>
+                            </connections>
+                        </slider>
+                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rRX-tn-pOO">
+                            <rect key="frame" x="157" y="54" width="105" height="26"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Frequency" id="E4y-uK-hvR">
+                                <font key="font" metaFont="system" size="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kr0-z7-YyK">
+                            <rect key="frame" x="14" y="-6" width="390" height="28"/>
+                            <sliderCell key="cell" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="hrQ-vM-edw">
+                                <font key="font" size="12" name="Helvetica"/>
+                            </sliderCell>
+                            <connections>
+                                <action selector="handleFrequencySliderValueChanged:" target="-2" id="18w-fh-kBT"/>
+                            </connections>
+                        </slider>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
             </subviews>
-            <constraints>
-                <constraint firstItem="Hi9-py-KrF" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="175" id="RHs-J7-r4o"/>
-                <constraint firstItem="97O-Cn-Qbw" firstAttribute="centerX" secondItem="Hi9-py-KrF" secondAttribute="centerX" id="TfG-yj-TXk"/>
-                <constraint firstItem="Hi9-py-KrF" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="41" id="Vd6-eE-FnK"/>
-                <constraint firstAttribute="trailing" secondItem="Hi9-py-KrF" secondAttribute="trailing" constant="41" id="XFR-ad-V35"/>
-                <constraint firstItem="Hi9-py-KrF" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="41" id="ayw-gI-HNZ"/>
-                <constraint firstItem="Hi9-py-KrF" firstAttribute="top" secondItem="97O-Cn-Qbw" secondAttribute="bottom" constant="8" symbolic="YES" id="ePn-kx-0e0"/>
-                <constraint firstAttribute="bottom" secondItem="Hi9-py-KrF" secondAttribute="bottom" constant="175" id="r8s-gs-0G7"/>
-                <constraint firstItem="Hi9-py-KrF" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="175" id="wlo-4V-Bdi"/>
-            </constraints>
             <point key="canvasLocation" x="-234" y="318"/>
         </customView>
     </objects>

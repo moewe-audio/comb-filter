@@ -13,6 +13,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
     //==========================================================================
     @IBOutlet var feedbackSlider: NSSlider!
     @IBOutlet var frequencySlider: NSSlider!
+    @IBOutlet var dampingSlider: NSSlider!
     //==========================================================================
     var audioUnit: AUAudioUnit?
     //==========================================================================
@@ -56,5 +57,13 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
 ) else { return }
         freqParam.setValue(sender.floatValue, originator: nil)
     }
+    
+    @IBAction func handleDampingSliderValueChanged(_ sender: NSSlider)
+    {
+        guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
+        guard let dampingParam = modulatorUnit.parameterTree?.parameter(withAddress: ParameterAddress.paramDamping.rawValue) else { return }
+        dampingParam.setValue(sender.floatValue, originator: nil)
+    }
+    
     //==========================================================================
 }

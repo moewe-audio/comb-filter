@@ -22,6 +22,8 @@
 		584B061120F5098B006694BA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584B061020F5098B006694BA /* AVFoundation.framework */; };
 		917E29E92E4D38A9001BEED4 /* CombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 917E29E72E4D38A9001BEED4 /* CombFilter.cpp */; };
 		917E29EA2E4D38C9001BEED4 /* CombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 917E29E72E4D38A9001BEED4 /* CombFilter.cpp */; };
+		91814F4E2E54FAF90094F366 /* OnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91814F4D2E54FAF90094F366 /* OnePole.cpp */; };
+		91814F4F2E54FAF90094F366 /* OnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91814F4D2E54FAF90094F366 /* OnePole.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		917E29E62E4D38A9001BEED4 /* CombFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CombFilter.hpp; sourceTree = "<group>"; };
 		917E29E72E4D38A9001BEED4 /* CombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CombFilter.cpp; sourceTree = "<group>"; };
 		917E29E82E4D38A9001BEED4 /* RingBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		91814F4C2E54FAF90094F366 /* OnePole.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OnePole.hpp; sourceTree = "<group>"; };
+		91814F4D2E54FAF90094F366 /* OnePole.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OnePole.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,8 @@
 				917E29E72E4D38A9001BEED4 /* CombFilter.cpp */,
 				917E29E82E4D38A9001BEED4 /* RingBuffer.h */,
 				915C70902E4F7AF900BCFFBC /* FractionalDelayLine.h */,
+				91814F4C2E54FAF90094F366 /* OnePole.hpp */,
+				91814F4D2E54FAF90094F366 /* OnePole.cpp */,
 			);
 			path = "audio-processing";
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 			files = (
 				917E29EA2E4D38C9001BEED4 /* CombFilter.cpp in Sources */,
 				5841704220F6190E00290C59 /* templateAUfxWithParametersAudioUnit.mm in Sources */,
+				91814F4E2E54FAF90094F366 /* OnePole.cpp in Sources */,
 				5841704420F6190E00290C59 /* AudioUnitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +365,7 @@
 			files = (
 				917E29E92E4D38A9001BEED4 /* CombFilter.cpp in Sources */,
 				584B05FD20F50729006694BA /* templateAUfxAudioUnit.mm in Sources */,
+				91814F4F2E54FAF90094F366 /* OnePole.cpp in Sources */,
 				584B05FF20F50729006694BA /* AudioUnitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

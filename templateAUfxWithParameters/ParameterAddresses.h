@@ -15,6 +15,7 @@ extern "C" {
 typedef NS_ENUM(AUParameterAddress, ParameterAddress) {
     kParamFeedback  = 0,
     kParamFrequency = 1,
+    kParamDamping = 2,
 };
 
 #ifdef __cplusplus

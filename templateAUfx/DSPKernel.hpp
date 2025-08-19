@@ -39,7 +39,6 @@ public:
             stereoComb[i].setFeedforwardGain(0.f);
             stereoComb[i].setFeedbackGain(0.f);
         }
-
     }
     //==============================================================================
     /**
@@ -146,7 +145,13 @@ public:
         {
             for (CombFilter &comb : stereoComb)
             {
-                comb.setFrequency( value);
+                comb.setFrequency(value);
+            }
+        } else if (address == kParamDamping)
+        {
+            for (CombFilter &comb : stereoComb)
+            {
+                comb.setDamping(value);
             }
         }
     }
@@ -166,6 +171,9 @@ public:
         } else if (address == kParamFrequency)
         {
             return stereoComb[0].getFrequency();
+        } else if (address == kParamFrequency)
+        {
+            return stereoComb[0].getDamping();
         }
         return 0;
     }

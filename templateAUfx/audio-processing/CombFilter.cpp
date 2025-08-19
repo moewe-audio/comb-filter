@@ -17,6 +17,7 @@ void CombFilter::init(float maxDelayMs, double sr)
     ffDelay.init(maxDelayMs, sampleRate);
     fbDelay.init(maxDelayMs, sampleRate);
     ready = true;
+    lpFilter.init(300.f, sr);
 }
 
 void CombFilter::setFrequency(float freq)
@@ -41,7 +42,8 @@ float CombFilter::processSample(float in)
 {
     if (!ready) return in;
     const float delayedX = ffDelay.read();
-    const float delayedY = fbDelay.read();
+    float delayedY = fbDelay.read();
+    delayedY = lpFilter.processSample(delayedY);
     float out = in + gFf * delayedX + gFb * delayedY;
     ffDelay.push(in);
     fbDelay.push(out);
