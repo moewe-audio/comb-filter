@@ -38,21 +38,21 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit
     {
         NSLog("Create Audio Unit", NSNull())
-        audioUnit = try templateAUfxWithParametersAudioUnit(componentDescription: componentDescription, options: [])
+        audioUnit = try combFilterAudioUnit(componentDescription: componentDescription, options: [])
         return audioUnit!
     }
     //==========================================================================
 
     @IBAction func handleFeedbackSliderValueChanged(_ sender: NSSlider)
     {
-        guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
+        guard let modulatorUnit = audioUnit as? combFilterAudioUnit else {return}
         guard let feedbackParam = modulatorUnit.parameterTree?.parameter(withAddress: ParameterAddress.paramFeedback.rawValue) else { return }
         feedbackParam.setValue(sender.floatValue, originator: nil)
     }
     
     @IBAction func handleFrequencySliderValueChanged(_ sender: NSSlider)
     {
-        guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
+        guard let modulatorUnit = audioUnit as? combFilterAudioUnit else {return}
         guard let freqParam = modulatorUnit.parameterTree?.parameter(withAddress: ParameterAddress.paramFrequency.rawValue
 ) else { return }
         freqParam.setValue(sender.floatValue, originator: nil)
@@ -60,7 +60,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
     
     @IBAction func handleDampingSliderValueChanged(_ sender: NSSlider)
     {
-        guard let modulatorUnit = audioUnit as? templateAUfxWithParametersAudioUnit else {return}
+        guard let modulatorUnit = audioUnit as? combFilterAudioUnit else {return}
         guard let dampingParam = modulatorUnit.parameterTree?.parameter(withAddress: ParameterAddress.paramDamping.rawValue) else { return }
         dampingParam.setValue(sender.floatValue, originator: nil)
     }

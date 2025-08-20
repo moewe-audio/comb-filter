@@ -33,7 +33,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit
     {
         NSLog("Create Audio Unit", NSNull())
-        audioUnit = try templateAUfxAudioUnit(componentDescription: componentDescription, options: [])
+        audioUnit = try combFilterAUfxAudioUnit(componentDescription: componentDescription, options: [])
         return audioUnit!
     }
     //==========================================================================

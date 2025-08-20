@@ -6,21 +6,21 @@
 //  Copyright © 2018 mhamilt7. All rights reserved.
 //
 //==============================================================================
-#import "templateAUfxWithParametersAudioUnit.h"
+#import "combFilterAudioUnit.h"
 #import <AVFoundation/AVFoundation.h>
 #import "DSPKernel.hpp"
 #import "BufferedAudioBus.hpp"
 #import "ParameterAddresses.h"
 
 //==============================================================================
-@interface templateAUfxWithParametersAudioUnit ()
+@interface combFilterAudioUnit ()
 @property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @property AUAudioUnitBus *outputBus;
 @property AUAudioUnitBusArray *inputBusArray;
 @property AUAudioUnitBusArray *outputBusArray ;
 @end
 //==============================================================================
-@implementation templateAUfxWithParametersAudioUnit
+@implementation combFilterAudioUnit
 {
     // Add your C++ Classes Here:
     BufferedInputBus _inputBus;

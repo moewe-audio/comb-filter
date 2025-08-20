@@ -6,5 +6,5 @@
 //  Copyright © 2018 mhamilt7. All rights reserved.
 //
 
-#import "templateAUfxWithParametersAudioUnit.h"
+#import "combFilterAudioUnit.h"
 #import "ParameterAddresses.h"

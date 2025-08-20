@@ -11,7 +11,7 @@
 //==============================================================================
 #include "CombFilter.hpp"
 #include <vector>
-#include "templateAUfxWithParametersAudioUnit.h"
+#include "combFilterAudioUnit.h"
 #include "ParameterAddresses.h"
 //==============================================================================
 /*

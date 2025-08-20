@@ -8,7 +8,7 @@
 //==============================================================================
 #import <AudioToolbox/AudioToolbox.h>
 //==============================================================================
-@interface templateAUfxAudioUnit : AUAudioUnit
+@interface combFilterAUfxAudioUnit : AUAudioUnit
 
 @end
 //==============================================================================

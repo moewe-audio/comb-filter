@@ -9,5 +9,5 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 
-@interface templateAUfxWithParametersAudioUnit : AUAudioUnit
+@interface combFilterAudioUnit : AUAudioUnit
 @end

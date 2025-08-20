@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>templateAUfx</string>
+	<string>CombFilter</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,13 +30,13 @@
 			<array>
 				<dict>
 					<key>description</key>
-					<string>templateAUfx</string>
+					<string>CombFilter</string>
 					<key>factoryFunction</key>
 					<string>$(PRODUCT_MODULE_NAME).AudioUnitViewController</string>
 					<key>manufacturer</key>
-					<string>MHAM</string>
+					<string>LSCH</string>
 					<key>name</key>
-					<string>MHAM: templateAUfx</string>
+					<string>LSCH: CombFilter</string>
 					<key>sandboxSafe</key>
 					<true/>
 					<key>subtype</key>
