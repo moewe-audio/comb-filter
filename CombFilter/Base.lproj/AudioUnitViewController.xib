@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AudioUnitViewController" customModule="templateAUfxWithParameters" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="AudioUnitViewController" customModule="CombFilter" customModuleProvider="target">
             <connections>
                 <outlet property="dampingSlider" destination="Lgb-4c-Ro4" id="edc-fu-hg5"/>
                 <outlet property="feedbackSlider" destination="Hi9-py-KrF" id="a0e-FY-9eL"/>
@@ -34,16 +34,16 @@
                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bY8-Ql-VvP">
                             <rect key="frame" x="0.0" y="228" width="418" height="20"/>
                             <subviews>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
-                                    <rect key="frame" x="-2" y="2" width="13" height="16"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-3e-ygM">
+                                    <rect key="frame" x="-2" y="2" width="11" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="2RG-iz-uD3">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hi9-py-KrF">
-                                    <rect key="frame" x="15" y="-6" width="390" height="28"/>
+                                    <rect key="frame" x="13" y="-6" width="390" height="28"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="386" id="mGN-0p-lg8"/>
                                     </constraints>
@@ -52,9 +52,9 @@
                                         <action selector="handleFeedbackSliderValueChanged:" target="-2" id="K2s-Nu-DDQ"/>
                                     </connections>
                                 </slider>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9PH-3e-ygM">
-                                    <rect key="frame" x="409" y="2" width="11" height="16"/>
-                                    <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="2RG-iz-uD3">
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5D4-yI-210">
+                                    <rect key="frame" x="407" y="2" width="13" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="+" id="heY-hR-5Wf">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

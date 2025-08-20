@@ -93,6 +93,7 @@
 		917E29E82E4D38A9001BEED4 /* RingBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
 		91814F4C2E54FAF90094F366 /* OnePole.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OnePole.hpp; sourceTree = "<group>"; };
 		91814F4D2E54FAF90094F366 /* OnePole.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OnePole.cpp; sourceTree = "<group>"; };
+		91F4A9462E5646190043012F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +146,7 @@
 				5841703F20F6190E00290C59 /* CombFilter */,
 				584B05E520F506FA006694BA /* Products */,
 				584B060F20F5098B006694BA /* Frameworks */,
+				91F4A9462E5646190043012F /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
