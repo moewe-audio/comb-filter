@@ -1,7 +1,7 @@
 # AUv3 Demo: CombFilter
 
 A little audio unit v3 demo plugin inspired by Elektron's CombFilter on the Octatrack.
-[Quick Demo]()
+[Quick Demo](https://vimeo.com/1111796939)
 
 ## Features
 + tuning based on frequency
