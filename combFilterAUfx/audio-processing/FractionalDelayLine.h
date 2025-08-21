@@ -27,11 +27,7 @@ public:
         if (maxDelaySamples < minNeeded)
             maxDelaySamples = minNeeded;
 
-        // extra samples for simpler wrap around reads
-        const int extra = 4;
-        const int size  = maxDelaySamples + extra;
-
-        buff.init(size);
+        buff.init(maxDelaySamples);
         setDelayMs(0.0f);
         ready = true;
     }
